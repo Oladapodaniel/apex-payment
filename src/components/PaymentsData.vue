@@ -52,6 +52,7 @@ const setActiveTab = (payload) => {
 };
 
 const payDues = async () => {
+  // Make payments
   if (selectedPayments.value.length === 0) {
     toast(
       "Select the due you want to pay for by checking the box beside each items on the list below.",
@@ -97,6 +98,7 @@ const payDues = async () => {
 };
 
 const getPaymentsData = async (num_per_page, page) => {
+  // Get all payments transactions
   loading.value = true;
   try {
     let { data } = await getPayments(
@@ -131,6 +133,7 @@ const getPaymentsData = async (num_per_page, page) => {
 getPaymentsData();
 
 const filterPaymentTransactions = computed(() => {
+  // Computations for the filter feature
   let transactions = paymentData.value.data;
 
   if (name.value) {

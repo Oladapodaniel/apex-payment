@@ -49,7 +49,7 @@ const { paymentHeaders, paymentData, list } = defineProps([
 ]);
 const emit = defineEmits(["numperpage", "setpage", "selecteditems"]);
 
-const num_per_page = ref(paymentData?.per_page.toString());
+const num_per_page = ref(paymentData?.per_page?.toString());
 const pages = ref([10, 20, 30, 40, 50, 60, 70, 80, 90, 100]);
 const selectedPaymentItems = ref([]);
 
@@ -60,6 +60,7 @@ watch(num_per_page, (newValue, oldValue) => {
 });
 
 const emitPage = (page, type) => {
+  // Send the page number with its type to its parent component
   if (type == "previous") {
     emit("setpage", { type: "previous", value: page });
   } else if (type == "next") {
@@ -70,6 +71,8 @@ const emitPage = (page, type) => {
 };
 
 const selectItem = (item) => {
+    // Composed the list of the checked payment data and 
+    // Emit its corresponding result to the parent
   if (selectedPaymentItems.value.length > 0) {
     const findIfItemExist = selectedPaymentItems.value.findIndex((i) => i.id === item.id);
     if (findIfItemExist < 0) {
